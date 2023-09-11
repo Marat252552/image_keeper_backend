@@ -23,10 +23,10 @@ class Controller {
             try {
                 const { login, password } = req.body;
                 if (!login || !password) {
-                    return res.status(400).send('Не все поля заполнены');
+                    return res.status(400).json({ message: 'Не все поля заполнены' });
                 }
                 if (yield (0, IsLoginDuplicated_1.default)(login)) {
-                    return res.status(400).send('Логин занят');
+                    return res.status(400).send({ message: 'Логин занят' });
                 }
                 let hashPassword = bcrypt_1.default.hashSync(password, 7);
                 let user = yield UserModel_1.default.create({
