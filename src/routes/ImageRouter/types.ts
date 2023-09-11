@@ -19,3 +19,10 @@ export type deleteImageReq_T = {
     image_id: string
   }
 }
+
+export type setLabelReq_T = {
+  body: {
+    image_id: string,
+    label: string
+  }
+}

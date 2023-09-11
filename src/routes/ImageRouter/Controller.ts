@@ -3,7 +3,7 @@ import {
   addImageReq_T,
   addImageRes_T,
   deleteImageReq_T,
-  getImageReq_T,
+  setLabelReq_T,
 } from "./types";
 import { DeleteFile, UploadImage } from "../../DataFlow/yandex_cloud/Actions";
 import { UploadFile_T } from "../../shared/types";
@@ -21,12 +21,13 @@ class Controller {
   async addImage(req: addImageReq_T, res: any) {
     try {
       const file = req.files.file;
-      if(file.mimetype.split('/')[0] !== 'image') {
-        return res.status(400).json({message: 'Поддерживаются только изображения'})
+      if (file.mimetype.split("/")[0] !== "image") {
+        return res
+          .status(400)
+          .json({ message: "Поддерживаются только изображения" });
       }
       let { label = file.name } = req.body;
       const { user_id } = res.locals.TokenPayload;
-
 
       if (file.size > FOUR_MEGABYTES) {
         return res
@@ -78,11 +79,26 @@ class Controller {
   async deleteImage(req: deleteImageReq_T, res: any) {
     try {
       const { image_id: _id } = req.params;
+      const { user_id } = res.locals.TokenPayload;
+
+      await ImageModel.deleteOne({ user_id, _id });
+
+      res.sendStatus(200);
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(500);
+    }
+  }
+  async setLabel(req: setLabelReq_T, res: any) {
+    try {
+      const { image_id: _id, label } = req.body;
       const {user_id} = res.locals.TokenPayload
+      
+      await ImageModel.updateOne({_id, user_id }, {label})
+      const image = await ImageModel.findOne({_id, user_id })
 
-      await ImageModel.deleteOne({user_id, _id})
+      res.status(200).json({image})
 
-      res.sendStatus(200)
     } catch (e) {
       console.log(e);
       res.sendStatus(500);

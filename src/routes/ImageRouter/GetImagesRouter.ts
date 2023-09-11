@@ -8,6 +8,7 @@ const GetPinsRouter = () => {
     router.post('/', CheckAccessToken, Controller.addImage)
     router.get('/', CheckAccessToken, Controller.getImages)
     router.delete('/:image_id', CheckAccessToken, Controller.deleteImage)
+    router.post('/label', CheckAccessToken, Controller.setLabel)
     return router
 }
 
