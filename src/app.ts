@@ -13,7 +13,7 @@ const jsonBodyMiddleware = express.json()
 
 export const corsOptions = 
 {
-    origin:['https://image-keeper-frontend.onrender.com'],
+    origin:['https://image-keeper-frontend.onrender.com', 'http://localhost:5173'],
     credentials:true,
     optionSuccessStatus:200
 }
