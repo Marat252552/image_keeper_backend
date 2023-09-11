@@ -13,7 +13,7 @@ const jsonBodyMiddleware = express.json()
 
 export const corsOptions = 
 {
-    origin:['http://localhost:5173', 'https://online-shop-front.onrender.com', 'https://marat252552.github.io/todolist_front', 'https://marat252552.github.io', 'https://todolist-front2.onrender.com'],
+    origin:['https://image-keeper-frontend.onrender.com'],
     credentials:true,
     optionSuccessStatus:200
 }

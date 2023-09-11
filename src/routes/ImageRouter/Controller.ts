@@ -1,18 +1,13 @@
-import PinModel from "../../DataFlow/mongo_database/Models/ImageModel";
 import {
   addImageReq_T,
-  addImageRes_T,
   deleteImageReq_T,
   setLabelReq_T,
 } from "./types";
-import { DeleteFile, UploadImage } from "../../DataFlow/yandex_cloud/Actions";
+import { UploadImage } from "../../DataFlow/yandex_cloud/Actions";
 import { UploadFile_T } from "../../shared/types";
 import { TWENTY_FOUR_HOURS } from "../../shared/TimePeriods";
-import verifyCaptchaAPI from "../../shared/VerifyCaptchaAPI";
 import { v4 } from "uuid";
-import GetPathToOperativeFolder from "../../shared/GetPathToOperative";
 import ImageModel from "../../DataFlow/mongo_database/Models/ImageModel";
-import UserModel from "../../DataFlow/mongo_database/Models/UserModel";
 
 const FOUR_MEGABYTES = 4000000;
 const days_alive = 100;

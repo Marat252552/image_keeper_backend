@@ -1,1 +1,0 @@
-An empty file to make sure operative folder is recreated by TSC in dist folder
