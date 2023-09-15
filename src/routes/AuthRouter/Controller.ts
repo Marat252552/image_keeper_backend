@@ -107,7 +107,7 @@ class Controller {
                 .json({ accessToken })
         } catch (e) {
             console.log(e)
-            res.sendStatus(500)
+            res.status(401).json({message: 'Пользователь не авторизован'})
         }
     }
     async isLogged(req: isLoggedReq_T, res: any) {

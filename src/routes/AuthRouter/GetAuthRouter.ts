@@ -7,7 +7,7 @@ const GetAuthRouter = () => {
     router.post('/signin', Controller.signin)
     router.post('/login', Controller.login)
     router.post('/islogindupl', Controller.isLoginDupl)
-    router.get('/islogged', Controller.isLogged)
+    router.get('/logged', Controller.isLogged)
     router.get('/refresh', Controller.refresh)
     router.delete('/logout', Controller.logout)
     return router

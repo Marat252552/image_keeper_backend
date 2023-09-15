@@ -117,7 +117,7 @@ class Controller {
             }
             catch (e) {
                 console.log(e);
-                res.sendStatus(500);
+                res.status(401).json({ message: 'Пользователь не авторизован' });
             }
         });
     }
