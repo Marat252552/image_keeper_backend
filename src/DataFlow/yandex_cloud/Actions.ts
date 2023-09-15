@@ -1,6 +1,5 @@
-import path from "path";
 import s3 from "./YandexBucketInit";
-import GetPathToOperativeFolder from "../../shared/GetPathToOperative";
+
 
 
 export let UploadImage = async (file: Buffer, file_name: string) => {

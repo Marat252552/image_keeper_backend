@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.corsOptions = void 0;
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const GetFilesRouter_1 = __importDefault(require("./routes/FilesRouter/GetFilesRouter"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const GetImagesRouter_1 = __importDefault(require("./routes/ImageRouter/GetImagesRouter"));
 const ImagesCleaner_1 = __importDefault(require("./LoopProcesses/ImagesCleaner/ImagesCleaner"));
@@ -27,12 +26,9 @@ app.use(body_parser_1.default.urlencoded({
     extended: true
 }));
 app.use(jsonBodyMiddleware);
-const FilesRouter = (0, GetFilesRouter_1.default)();
 const ImagesRouter = (0, GetImagesRouter_1.default)();
 const AuthRouter = (0, GetAuthRouter_1.default)();
 app.use('/images', ImagesRouter);
-app.use('/files', FilesRouter);
 app.use('/auth', AuthRouter);
-// app.use(express.static(path.resolve(__dirname, 'static')))
 (0, ImagesCleaner_1.default)();
 exports.default = app;

@@ -1,6 +1,5 @@
 import express from 'express'
 import cors from 'cors'
-import GetFilesRouter from './routes/FilesRouter/GetFilesRouter'
 import bodyParser from 'body-parser'
 import GetImagesRouter from './routes/ImageRouter/GetImagesRouter'
 import ImagesCleaner from './LoopProcesses/ImagesCleaner/ImagesCleaner'
@@ -28,15 +27,12 @@ app.use(bodyParser.urlencoded({
 app.use(jsonBodyMiddleware)
 
 
-const FilesRouter = GetFilesRouter()
 const ImagesRouter = GetImagesRouter()
 const AuthRouter = GetAuthRouter()
 
 
 app.use('/images', ImagesRouter)
-app.use('/files', FilesRouter)
 app.use('/auth', AuthRouter)
-// app.use(express.static(path.resolve(__dirname, 'static')))
 
 
 ImagesCleaner()

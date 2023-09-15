@@ -22,20 +22,25 @@ class Controller {
     addImage(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const file = req.files.file;
-                if (file.mimetype.split("/")[0] !== "image") {
-                    return res
-                        .status(400)
-                        .json({ message: "Поддерживаются только изображения" });
+                if (!req.files || !req.files.file) {
+                    return res.status(400).json({ message: 'Прикрепите изображение к запросу' });
                 }
-                let { label = file.name } = req.body;
-                const { user_id } = res.locals.TokenPayload;
+                const file = req.files.file;
+                // Проверка, если каким то образом файл имеет тип не UploadedFile а UploadedFile[]
+                if (file instanceof Array) {
+                    return res.status(400).json({ message: 'Неверный формат файла' });
+                }
+                if (file.mimetype.split('/')[0] !== 'image') {
+                    return res.status(400).json({ message: 'Поддерживаются только изображения' });
+                }
                 if (file.size > FOUR_MEGABYTES) {
                     return res
                         .status(413)
-                        .json({ message: "Размер файла не может быть больше 4х Мбайт" });
+                        .json({ message: 'Размер файла не может быть больше 4х Мбайт' });
                 }
-                const file_name = (0, uuid_1.v4)() + "." + file.mimetype.split("/")[1];
+                let { label = file.name } = req.body;
+                const { user_id } = res.locals.TokenPayload;
+                const file_name = (0, uuid_1.v4)() + '.' + file.mimetype.split('/')[1];
                 let { Location, key } = yield (0, Actions_1.UploadImage)(file.data, file_name);
                 let days_in_timestamp_format = days_alive * TimePeriods_1.TWENTY_FOUR_HOURS;
                 let expiresAt = Date.now() + days_in_timestamp_format;

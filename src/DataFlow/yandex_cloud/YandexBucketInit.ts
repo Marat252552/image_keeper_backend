@@ -1,4 +1,3 @@
-import path from "path";
 let EasyYandexS3 = require('easy-yandex-s3')
 import dotenv from 'dotenv'
 
